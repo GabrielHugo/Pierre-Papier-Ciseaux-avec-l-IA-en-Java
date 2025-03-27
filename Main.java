@@ -1,7 +1,11 @@
 import java.util.Random;
 import java.util.Scanner;
 
+import java.util.ArrayList;
+
 public class Main {
+
+    public static ArrayList<String> userChoice = new ArrayList<String>();
 
     public static void main(String[] args) {
 
@@ -9,15 +13,30 @@ public class Main {
         
         Scanner firstQuestion = new Scanner(System.in); 
 
-        System.out.println("Choisis entre pierre, papier et ciseaux");
+        System.out.println("");
 
-        String userResponse = firstQuestion.nextLine();
+
+        
 
         //condition
 
+
+        while(true) {
+
+            System.out.println("Choisis entre pierre, papier et ciseaux ou exit pour arrêté");
+
+            String userResponse = firstQuestion.nextLine();
+
+            if (userResponse.equals("exit")) {
+
+                System.out.println("Orvoir");
+
+                break;
+            }
+
         if (userResponse.equals("pierre") || userResponse.equals("papier") || userResponse.equals("ciseaux")) {
 
-            System.out.println("Tu as choisis" + ' ' + userResponse);
+            userChoice.add(userResponse);
 
         } else {
 
@@ -60,6 +79,9 @@ public class Main {
 
         }
 
+        
+        
+
         //result
 
         if (userResponse.equals("pierre") && botResponse.equals("papier")) {
@@ -80,6 +102,8 @@ public class Main {
 
         }
 
+        System.out.println(userChoice);
+
+        }
     }
-    
 }
