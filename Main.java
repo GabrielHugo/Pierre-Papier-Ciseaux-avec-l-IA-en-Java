@@ -2,6 +2,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Main {
 
@@ -13,13 +14,7 @@ public class Main {
         
         Scanner firstQuestion = new Scanner(System.in); 
 
-        System.out.println("");
-
-
-        
-
         //condition
-
 
         while(true) {
 
@@ -29,7 +24,7 @@ public class Main {
 
             if (userResponse.equals("exit")) {
 
-                System.out.println("Orvoir");
+                System.out.println("Au revoir");
 
                 break;
             }
@@ -40,69 +35,65 @@ public class Main {
 
         } else {
 
-            System.err.println("error 1");
-            main(args);
+            System.err.println("Erreur 1");
+            continue;
 
         }
 
-        //bot
-
-        String[] obj = {"pierre", "papier", "ciseaux"};
-
-        Random random = new Random();
-
-        int index = random.nextInt(obj.length) +1;
-
+        //bot algorithm
+        
         String botResponse = "";
 
-        switch (index) {
+        String averagePlayerResponse = Collections.max(userChoice);
 
-            case 1:
+        String getTheLastResponse = userChoice.get(userChoice.size() - 1);
 
-                botResponse = "pierre";
-                break;
+        if (averagePlayerResponse.equals("pierre")) {
 
-            case 2:
+            botResponse = "papier";
 
-                botResponse = "papier";
-                break;
+        } else if (averagePlayerResponse.equals("papier")) {
+            
+            botResponse = "ciseaux";
 
-            case 3:
+        } else if (averagePlayerResponse.equals("ciseaux")) {
 
-                botResponse = "ciseaux";
-                break;
-        
-            default:
+            botResponse = "pierre";
 
-                System.out.println("Error 2");
-                break;
+        } else {
+
+            System.out.println("Erreur du bot");
 
         }
 
-        
+        System.out.println("Réponse du bot " + botResponse);
         
 
         //result
 
-        if (userResponse.equals("pierre") && botResponse.equals("papier")) {
+        if (userResponse.equals("pierre") && botResponse.equals("papier") 
+            || userResponse.equals("papier") && botResponse.equals("ciseaux")
+            || userResponse.equals("ciseaux") && botResponse.equals("pierre")) {
 
-            System.out.println("Bot gagne avec papier!");
+            System.out.println("Bot à gagner avec " + botResponse);
 
-        } else if (userResponse.equals("papier") && botResponse.equals("pierre")) {
+        } else if (botResponse.equals("pierre") && userResponse.equals("papier") 
+            || botResponse.equals("papier") && userResponse.equals("ciseaux")
+            || botResponse.equals("ciseaux") && userResponse.equals("pierre")) {
 
-            System.out.println("Tu gagnes avec papier!");
+                System.out.println("Tu as gagné avec " + userResponse);
 
-        } else if (userResponse.equals("ciseaux") && botResponse.equals("pierre")) {
-            
-            System.out.println("Bot gagne avec pierre!");
-    
         } else {
 
-            System.out.println("Egalité, vous avez tous les deux choisi " + userResponse);
+            System.out.println("Egalité");
 
         }
 
-        System.out.println(userChoice);
+        System.out.println("Tableau des choix du joueur " + userChoice);
+
+        System.out.println("Jeu le plus joué " + averagePlayerResponse);
+
+        System.out.println("La dernière réponse du joueur " + getTheLastResponse);
 
         }
     }
